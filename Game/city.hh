@@ -1,10 +1,11 @@
 #ifndef CITY_HH
 #define CITY_HH
 #include "interfaces/icity.hh"
+#include "QTime"
 
 namespace StudentSide {
 
-
+const QTime GAME_END_TIME = QTime(10, 1, 0);
 
 class City : public Interface::ICity
 {
@@ -115,6 +116,12 @@ public:
      * @post Exception guarantee: nothrow.
      */
     bool isGameOver() const override;
+
+    QImage background_;
+    QTime gameclock_;
+    int state_;
+    std::vector<std::shared_ptr<Interface::IStop>> stops_;
+    std::vector<std::shared_ptr<Interface::IActor>> actors_;
 };
 
 }
