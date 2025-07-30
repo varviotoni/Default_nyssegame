@@ -2,10 +2,14 @@
 #define CITY_HH
 #include "interfaces/icity.hh"
 
-class city : public Interface::ICity
+namespace StudentSide {
+
+
+
+class City : public Interface::ICity
 {
 public:
-    city();
+    City();
 
     // ICity interface
 public:
@@ -22,4 +26,5 @@ public:
     bool isGameOver() const override;
 };
 
+}
 #endif // CITY_HH

@@ -7,6 +7,7 @@ CONFIG += c++14
 
 SOURCES += \
     city.cpp \
+    creategame.cpp \
     main.cc
 
 win32:CONFIG(release, debug|release): LIBS += \
