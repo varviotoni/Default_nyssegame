@@ -97,7 +97,6 @@ bool City::isGameOver() const
     }
     else
     {
-        qDebug() << "GAME IS NOT OVER";
         return false;
     }
 }

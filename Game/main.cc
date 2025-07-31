@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "graphics/simplemainwindow.hh"
+#include "mainwindow.hh"
 #include "city.hh"
 #include "creategame.hh"
 #include "core/logic.hh"
@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
     std::shared_ptr<StudentSide::City> city =
         std::dynamic_pointer_cast<StudentSide::City>(icity);
 
-    CourseSide::SimpleMainWindow mainwindow;
-    auto logic = new CourseSide::Logic(&mainwindow);
+    StudentSide::SimpleMainWindow mainwindow(city);
+    auto logic = new CourseSide::Logic();
     logic->takeCity(icity);
     logic->fileConfig();
     logic->setTime(10,0);
