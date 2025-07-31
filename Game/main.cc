@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     logic->takeCity(icity);
     logic->fileConfig();
     logic->setTime(10,0);
+    logic->finalizeGameStart();
     mainwindow.show();
 
     return a.exec();

@@ -1,4 +1,5 @@
 #include "city.hh"
+#include <QDebug>
 
 
 
@@ -88,9 +89,16 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 
 bool City::isGameOver() const
 {
+
     if(gameclock_>=GAME_END_TIME)
     {
+        qDebug() << "GAME OVER";
         return true;
+    }
+    else
+    {
+        qDebug() << "GAME IS NOT OVER";
+        return false;
     }
 }
 
