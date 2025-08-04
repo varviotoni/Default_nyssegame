@@ -41,3 +41,6 @@ HEADERS += \
 
 FORMS += \
     ../Course/CourseLib/graphics/simplemainwindow.ui
+
+RESOURCES += \
+    graphics_resources.qrc

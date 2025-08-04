@@ -101,4 +101,10 @@ bool City::isGameOver() const
     }
 }
 
+void City::printActors()
+{
+
+}
+
+
 } // namespace

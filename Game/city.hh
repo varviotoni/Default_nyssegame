@@ -117,6 +117,8 @@ public:
      */
     bool isGameOver() const override;
 
+    void printActors();
+
     QImage background_;
     QTime gameclock_;
     int state_;

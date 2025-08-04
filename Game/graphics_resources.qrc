@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>offlinedata/bus.png</file>
+        <file>offlinedata/stop.png</file>
+    </qresource>
+</RCC>
