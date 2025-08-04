@@ -1,6 +1,7 @@
 #include "mainwindow.hh"
 #include "ui_simplemainwindow.h"
 #include "city.hh"
+#include "actorgui.hh"
 #include <QDebug>
 
 const int PADDING = 10;

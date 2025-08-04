@@ -4,18 +4,25 @@
 
 namespace StudentSide
 {
+const int WIDTH = 15;
+const int HEIGHT = 15;
 
 class ActorGUI : public CourseSide::SimpleActorItem
 {
 public:
-    ActorGUI();
+    ActorGUI(int x, int y, int type = 0);
     // Brief destructor
     ~ActorGUI();
 
     // QGraphicsItem interface
-public:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    void setCoord(int x, int y);
+
+private:
+    int x_;
+    int y_;
+    int type_;
 };
 } // namespace
 #endif // ActorGUI_HH
