@@ -4,6 +4,7 @@
 #include "interfaces/iactor.hh"
 #include "graphics/simpleactoritem.hh"
 #include "city.hh"
+#include "actorgui.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -33,6 +34,7 @@ public:
     virtual void addActor(int locX, int locY, int type = 0);
     void updateCoords(int nX, int nY);
     void setPicture(QImage &img);
+    void drawAllActors();
 
 signals:
     void gameStarted();
@@ -45,7 +47,7 @@ private:
     std::shared_ptr<StudentSide::City> city_;
     QGraphicsScene *map;
     QTimer *timer;
-    QVector<QGraphicsItem*> actors_;
+    QVector<ActorGUI*> actors_;
     CourseSide::SimpleActorItem* last_;
 
     int width_ = 500; //pxls

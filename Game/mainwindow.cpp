@@ -51,7 +51,7 @@ void SimpleMainWindow::setTick(int t)
 
 void SimpleMainWindow::addActor(int locX, int locY, int type)
 {
-    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
+    StudentSide::ActorGUI* nActor = new StudentSide::ActorGUI(locX, locY, type);
     actors_.push_back(nActor);
     map->addItem(nActor);
     last_ = nActor;
@@ -67,10 +67,31 @@ void SimpleMainWindow::setPicture(QImage &img)
     map->setBackgroundBrush(img);
 }
 
+void SimpleMainWindow::drawAllActors()
+{
+    // Clear existing actors first
+    for (auto actor : actors_) {
+        map->removeItem(actor);
+        delete actor;
+    }
+    actors_.clear();
+
+    // Get all actors from the city and draw them
+    auto allActors = city_->actors_; // You'll need this method in City class
+
+    for (const auto& actor : allActors) {
+        Interface::Location loc = actor->giveLocation();
+        int type = 0; // You might need to add a method to get actor type
+        addActor(loc.giveX(), loc.giveY(), type);
+    }
 }
+
+
+
 
 void StudentSide::SimpleMainWindow::on_startButton_clicked()
 {
     qDebug() << "Start clicked";
     emit gameStarted();
 }
+} //namespace

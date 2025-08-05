@@ -18,6 +18,7 @@ public:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     void setCoord(int x, int y);
+    void advance(int step) override;
 
 private:
     int x_;
