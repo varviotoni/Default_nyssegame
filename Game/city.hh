@@ -117,13 +117,15 @@ public:
      */
     bool isGameOver() const override;
 
-    void printActors();
+    const std::vector<std::shared_ptr<Interface::IActor>>& getActors() const;
 
     QImage background_;
     QTime gameclock_;
     int state_;
-    std::vector<std::shared_ptr<Interface::IStop>> stops_;
+
+private:
     std::vector<std::shared_ptr<Interface::IActor>> actors_;
+    std::vector<std::shared_ptr<Interface::IStop>> stops_;
 };
 
 }

@@ -3,7 +3,11 @@
 namespace StudentSide
 {
 
-ActorGUI::ActorGUI(int x, int y, int type): CourseSide::SimpleActorItem(x, y, type), x_(x), y_(y), type_(type)
+ActorGUI::ActorGUI(int x, int y, int type):
+    CourseSide::SimpleActorItem(x, y, type),
+    x_(x),
+    y_(y),
+    type_(type)
 {
     setPos(mapToParent(x_, y_));
 }
@@ -41,8 +45,8 @@ void ActorGUI::advance(int step)
         // Phase 0: Calculate next state
         // No additional logic needed here for now
         // This is where you would typically update the actor's state based on game logic
-        //nextX = x();
-        //nextY = y();
+        x_ = x()  + 10;
+        y_ = y()  + 10;
         return;
     }
     else if (step == 1) {

@@ -77,7 +77,7 @@ void SimpleMainWindow::drawAllActors()
     actors_.clear();
 
     // Get all actors from the city and draw them
-    auto allActors = city_->actors_; // You'll need this method in City class
+    auto allActors = city_->getActors(); // You'll need this method in City class
 
     for (const auto& actor : allActors) {
         Interface::Location loc = actor->giveLocation();
@@ -92,6 +92,7 @@ void SimpleMainWindow::drawAllActors()
 void StudentSide::SimpleMainWindow::on_startButton_clicked()
 {
     qDebug() << "Start clicked";
+    drawAllActors(); // Draw all actors when game starts
     emit gameStarted();
 }
 } //namespace

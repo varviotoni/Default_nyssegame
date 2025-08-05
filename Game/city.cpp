@@ -8,8 +8,9 @@ namespace StudentSide{
 City::City():
     gameclock_(),
     state_(1),
-    stops_(),
-    actors_()
+    actors_(),
+    stops_()
+
 {
 
 
@@ -100,11 +101,8 @@ bool City::isGameOver() const
         return false;
     }
 }
-
-void City::printActors()
-{
-
+const std::vector<std::shared_ptr<Interface::IActor>>& City::getActors() const {
+    return actors_;
 }
-
 
 } // namespace
