@@ -22,7 +22,7 @@ public:
 private:
     int x_;
     int y_;
-    int type_;
+    const int type_;
 };
 } // namespace
 #endif // ActorGUI_HH

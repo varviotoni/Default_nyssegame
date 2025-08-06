@@ -35,6 +35,7 @@ public:
     void updateCoords(int nX, int nY);
     void setPicture(QImage &img);
     void drawAllActors();
+    void drawStops();
     void updateAllActorPositions();
 
 signals:
@@ -54,6 +55,9 @@ private:
     int width_ = 1000; //pxls
     int height_ = 500;
     int tick_ = 500; //ms
+    const int BUS_TYPE = 0;
+    const int PASSENGER_TYPE = 1;
+    const int STOP_TYPE = 2;    
 };
 
 } //namespace

@@ -27,9 +27,26 @@ void ActorGUI::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     Q_UNUSED(option)
     Q_UNUSED(widget)
     QRectF bounds = boundingRect();
-    QColor color(type_%256, type_%256, type_%256);
-    QBrush brush(color);
-    painter->setBrush(brush);
+    // Set the color based on the type
+    // Bus
+    if (type_ == 0) {
+        // Draw a black rectangle for type 0
+        painter->setBrush(Qt::blue);
+    }
+    // Passenger
+    else if (type_ == 1) {
+        // Draw a red rectangle for type 1
+        painter->setBrush(Qt::red);
+    }
+    // Stop
+    else if (type_ == 2) {
+        // Draw a green rectangle for type 2
+        painter->setBrush(Qt::green);
+    }
+
+    //QColor color(0, 0, type_%256);
+    //QBrush brush(color);
+    //painter->setBrush(brush);
     painter->drawEllipse(bounds);
 }
 

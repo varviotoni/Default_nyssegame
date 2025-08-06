@@ -69,21 +69,33 @@ void SimpleMainWindow::setPicture(QImage &img)
 
 void SimpleMainWindow::drawAllActors()
 {
-    // Clear existing actors first
-    for (auto actor : actors_) {
-        map->removeItem(actor);
+     // Clear existing actors first
+     for (auto actor : actors_) {
+         //map->removeItem(actor);
         delete actor;
     }
     actors_.clear();
 
     // Get all actors from the city and draw them
-    auto allActors = city_->getActors(); // You'll need this method in City class
+    auto allActors = city_->getActors();
 
-    for (const auto& actor : allActors) {
-        Interface::Location loc = actor->giveLocation();
-        int type = 1; // You might need to add a method to get actor type
-        addActor(loc.giveX(), loc.giveY(), type);
-    }
+    for (auto const &actor : allActors) {
+        // Check if the actor is a bus. Use dynamic_cast.
+        if (std::dynamic_pointer_cast<Interface::IVehicle>(actor)) {
+            Interface::Location loc = actor->giveLocation();
+            addActor(loc.giveX(), loc.giveY(), BUS_TYPE);
+        }
+
+    //     if (std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
+    //         Interface::Location loc = actor->giveLocation();
+    //         addActor(loc.giveX(), loc.giveY(), PASSENGER_TYPE);
+    // }
+}
+}
+
+void SimpleMainWindow::drawStops()
+{
+
 }
 
 void SimpleMainWindow::updateAllActorPositions()
