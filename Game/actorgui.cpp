@@ -43,9 +43,7 @@ void ActorGUI::advance(int step)
 {
     if (step == 0) {
         // Phase 0: Calculate next state
-        // No additional logic needed here for now
-        // This is where you would typically update the actor's state based on game logic
-        x_ = x()  + 10;
+        x_ = x() + 10; // Example logic to move the actor
         y_ = y()  + 10;
         return;
     }

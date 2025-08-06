@@ -35,6 +35,7 @@ public:
     void updateCoords(int nX, int nY);
     void setPicture(QImage &img);
     void drawAllActors();
+    void updateAllActorPositions();
 
 signals:
     void gameStarted();

@@ -29,7 +29,7 @@ SimpleMainWindow::SimpleMainWindow(std::shared_ptr<StudentSide::City> city, QWid
     //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
 
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+    connect(timer, &QTimer::timeout, this, &SimpleMainWindow::updateAllActorPositions);
     timer->start(tick_);
 }
 
@@ -81,13 +81,27 @@ void SimpleMainWindow::drawAllActors()
 
     for (const auto& actor : allActors) {
         Interface::Location loc = actor->giveLocation();
-        int type = 0; // You might need to add a method to get actor type
+        int type = 1; // You might need to add a method to get actor type
         addActor(loc.giveX(), loc.giveY(), type);
     }
 }
 
+void SimpleMainWindow::updateAllActorPositions()
+{
+    auto allActors = city_->getActors();
 
+    // // Make sure we have the same number of GUI actors as city actors
+    // if (actors_.size() != allActors.size()) {
+    //     drawAllActors(); // Redraw if counts don't match
+    //     return;
+    // }
 
+    // Update positions of existing GUI actors
+    for (size_t i = 0; i < actors_.size() && i < allActors.size(); ++i) {
+        Interface::Location loc = allActors[i]->giveLocation();
+        actors_[i]->setCoord(loc.giveX(), loc.giveY());
+    }
+}
 
 void StudentSide::SimpleMainWindow::on_startButton_clicked()
 {
