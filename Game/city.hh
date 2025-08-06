@@ -5,7 +5,7 @@
 
 namespace StudentSide {
 
-const QTime GAME_END_TIME = QTime(10, 10, 0);
+const QTime GAME_END_TIME = QTime(11, 10, 0);
 
 class City : public Interface::ICity
 {

@@ -51,7 +51,7 @@ private:
     QVector<ActorGUI*> actors_;
     CourseSide::SimpleActorItem* last_;
 
-    int width_ = 500; //pxls
+    int width_ = 1000; //pxls
     int height_ = 500;
     int tick_ = 500; //ms
 };

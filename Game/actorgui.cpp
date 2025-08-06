@@ -39,21 +39,4 @@ void ActorGUI::setCoord(int x, int y)
     setY( y );
 }
 
-void ActorGUI::advance(int step)
-{
-    if (step == 0) {
-        // Phase 0: Calculate next state
-        x_ = x() + 10; // Example logic to move the actor
-        y_ = y()  + 10;
-        return;
-    }
-    else if (step == 1) {
-        // Phase 1: Update position/animation
-        // No additional logic needed here for now
-        setCoord(x_, y_);
-        return;
-    }
-    // Phase 1: Update position/animation
-    // Add your animation logic here if needed
-}
 } //namespace
