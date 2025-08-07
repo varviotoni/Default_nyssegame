@@ -24,7 +24,7 @@ City::~City()
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
-    background_ = basicbackground;
+    background_ = bigbackground;
 }
 
 void City::setClock(QTime clock)
@@ -101,8 +101,14 @@ bool City::isGameOver() const
         return false;
     }
 }
-const std::vector<std::shared_ptr<Interface::IActor>>& City::getActors() const {
+const std::vector<std::shared_ptr<Interface::IActor>>& City::getActors() const
+{
     return actors_;
+}
+
+const std::vector<std::shared_ptr<Interface::IStop>>& City::getStops() const
+{
+    return stops_;
 }
 
 } // namespace

@@ -31,21 +31,27 @@ void ActorGUI::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     // Bus
     if (type_ == 0) {
         // Set Z value for bus to be on top
-        this->setZValue(10);
-        // Draw a black rectangle for type 0
-        painter->setBrush(Qt::blue);
+        this->setZValue(5);
+        QImage busImage(":offlinedata/bus.png");
+        painter->drawImage(bounds, busImage);
+
+        // painter->setBrush(Qt::blue);
     }
     // Passenger
     else if (type_ == 1) {
-        this->setZValue(5);
+        QRectF pas_bounds = QRectF(0,0,WIDTH/2,HEIGHT/2);
+        this->setZValue(10);
         painter->setBrush(Qt::red);
+        painter->drawEllipse(pas_bounds);
     }
     // Stop
     else if (type_ == 2) {
-        this->setZValue(0);
-        painter->setBrush(Qt::green);
+        this->setZValue(4);
+        QImage stopImage(":offlinedata/stop.png");
+        painter->drawImage(bounds, stopImage);
+        // painter->setBrush(Qt::green);
     }
-    painter->drawEllipse(bounds);
+
 }
 
 void ActorGUI::setCoord(int x, int y)

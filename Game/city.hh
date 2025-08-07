@@ -119,6 +119,8 @@ public:
 
     const std::vector<std::shared_ptr<Interface::IActor>>& getActors() const;
 
+    const std::vector<std::shared_ptr<Interface::IStop>>& getStops() const;
+
     QImage background_;
     QTime gameclock_;
     int state_;

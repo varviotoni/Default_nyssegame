@@ -81,28 +81,56 @@ void SimpleMainWindow::drawAllActors()
 
     for (auto const &actor : allActors) {
         // Check actor type. Use dynamic_cast.
-        if (std::dynamic_pointer_cast<Interface::IVehicle>(actor)) {
+        if (std::dynamic_pointer_cast<Interface::IVehicle>(actor)){
             Interface::Location loc = actor->giveLocation();
             addActor(loc.giveX(), loc.giveY(), BUS_TYPE);
         }
-        else if (std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
-            auto passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor);
-            if (!passenger->isInVehicle()){
-                Interface::Location loc = actor->giveLocation();
-                addActor(loc.giveX(), loc.giveY(), PASSENGER_TYPE);
-            }
-        }
+        // else if (std::dynamic_pointer_cast<Interface::IPassenger>(actor))
+        // {
+        //     auto passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor);
+        //     if (!passenger->isInVehicle()){
+        //         Interface::Location loc = actor->giveLocation();
+        //         addActor(loc.giveX(), loc.giveY(), PASSENGER_TYPE);
+        //     }
+        // }
     }
 }
 
 void SimpleMainWindow::drawStops()
 {
-
+    auto stops = city_->getStops();
+    for (auto const &stop : stops)
+    {
+        Interface::Location loc = stop->getLocation();
+        addActor(loc.giveX(),loc.giveY(),STOP_TYPE);
+    }
 }
 
 void SimpleMainWindow::updateAllActorPositions()
 {
+    // Clear existing actors first
+    for (auto actor : actors_) {
+        map->removeItem(actor);
+        //delete actor;
+    }
+    actors_.clear();
     auto allActors = city_->getActors();
+
+    for (auto const &actor : allActors) {
+        // Check actor type. Use dynamic_cast.
+        if (std::dynamic_pointer_cast<Interface::IVehicle>(actor)){
+            Interface::Location loc = actor->giveLocation();
+            addActor(loc.giveX(), loc.giveY(), BUS_TYPE);
+        }
+        // else if (std::dynamic_pointer_cast<Interface::IPassenger>(actor))
+        // {
+        //     auto passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor);
+        //     if (!passenger->isInVehicle()){
+        //         Interface::Location loc = actor->giveLocation();
+        //         addActor(loc.giveX(), loc.giveY(), PASSENGER_TYPE);
+        //     }
+        // }
+    }
 
     // // Make sure we have the same number of GUI actors as city actors
     // if (actors_.size() != allActors.size()) {
@@ -115,12 +143,14 @@ void SimpleMainWindow::updateAllActorPositions()
         Interface::Location loc = allActors[i]->giveLocation();
         actors_[i]->setCoord(loc.giveX(), loc.giveY());
     }
+    drawStops();
 }
 
 void StudentSide::SimpleMainWindow::on_startButton_clicked()
 {
     qDebug() << "Start clicked";
-    drawAllActors(); // Draw all actors when game starts
+    //drawAllActors();
+    //drawStops();
     emit gameStarted();
 }
 } //namespace

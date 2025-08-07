@@ -2,10 +2,11 @@
 #define ActorGUI_HH
 #include "graphics/simpleactoritem.hh"
 
+
 namespace StudentSide
 {
-const int WIDTH = 15;
-const int HEIGHT = 15;
+const int WIDTH = 30;
+const int HEIGHT = 30;
 
 class ActorGUI : public CourseSide::SimpleActorItem
 {
