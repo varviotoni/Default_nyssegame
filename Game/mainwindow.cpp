@@ -71,7 +71,7 @@ void SimpleMainWindow::drawAllActors()
 {
      // Clear existing actors first
      for (auto actor : actors_) {
-         //map->removeItem(actor);
+         map->removeItem(actor);
         delete actor;
     }
     actors_.clear();
@@ -80,17 +80,19 @@ void SimpleMainWindow::drawAllActors()
     auto allActors = city_->getActors();
 
     for (auto const &actor : allActors) {
-        // Check if the actor is a bus. Use dynamic_cast.
+        // Check actor type. Use dynamic_cast.
         if (std::dynamic_pointer_cast<Interface::IVehicle>(actor)) {
             Interface::Location loc = actor->giveLocation();
             addActor(loc.giveX(), loc.giveY(), BUS_TYPE);
         }
-
-    //     if (std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
-    //         Interface::Location loc = actor->giveLocation();
-    //         addActor(loc.giveX(), loc.giveY(), PASSENGER_TYPE);
-    // }
-}
+        else if (std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
+            auto passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor);
+            if (!passenger->isInVehicle()){
+                Interface::Location loc = actor->giveLocation();
+                addActor(loc.giveX(), loc.giveY(), PASSENGER_TYPE);
+            }
+        }
+    }
 }
 
 void SimpleMainWindow::drawStops()

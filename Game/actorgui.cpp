@@ -30,23 +30,21 @@ void ActorGUI::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     // Set the color based on the type
     // Bus
     if (type_ == 0) {
+        // Set Z value for bus to be on top
+        this->setZValue(10);
         // Draw a black rectangle for type 0
         painter->setBrush(Qt::blue);
     }
     // Passenger
     else if (type_ == 1) {
-        // Draw a red rectangle for type 1
+        this->setZValue(5);
         painter->setBrush(Qt::red);
     }
     // Stop
     else if (type_ == 2) {
-        // Draw a green rectangle for type 2
+        this->setZValue(0);
         painter->setBrush(Qt::green);
     }
-
-    //QColor color(0, 0, type_%256);
-    //QBrush brush(color);
-    //painter->setBrush(brush);
     painter->drawEllipse(bounds);
 }
 
