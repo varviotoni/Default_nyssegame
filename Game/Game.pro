@@ -10,7 +10,8 @@ SOURCES += \
     city.cpp \
     creategame.cpp \
     main.cc \
-    mainwindow.cpp
+    mainwindow.cpp \
+    player.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -39,7 +40,8 @@ else:unix: PRE_TARGETDEPS += \
 HEADERS += \
     actorgui.hh \
     city.hh \
-    mainwindow.hh
+    mainwindow.hh \
+    player.hh
 
 FORMS += \
     ../Course/CourseLib/graphics/simplemainwindow.ui

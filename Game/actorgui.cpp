@@ -51,7 +51,12 @@ void ActorGUI::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter->drawImage(bounds, stopImage);
         // painter->setBrush(Qt::green);
     }
-
+    // Alien
+    else if (type_ == 3){
+        this->setZValue(3);
+        QImage alienImage(":offlinedata/alien.png");
+        painter->drawImage(bounds, alienImage);
+    }
 }
 
 void ActorGUI::setCoord(int x, int y)

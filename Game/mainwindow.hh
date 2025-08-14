@@ -50,6 +50,7 @@ private:
     QTimer *timer;
     QVector<ActorGUI*> actors_;
     QVector<ActorGUI*> stops_;
+    QVector<ActorGUI*> player_;
     CourseSide::SimpleActorItem* last_;
 
     int width_ = 1000; //pxls
@@ -57,7 +58,8 @@ private:
     int tick_ = 150; //ms
     const int BUS_TYPE = 0;
     const int PASSENGER_TYPE = 1;
-    const int STOP_TYPE = 2;    
+    const int STOP_TYPE = 2;
+    const int ALIEN_TYPE = 3;
 };
 
 } //namespace

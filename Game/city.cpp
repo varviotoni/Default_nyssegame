@@ -78,10 +78,8 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
     std::vector<std::shared_ptr<Interface::IActor>> nearby_actors = {};
-    for(std::shared_ptr<Interface::IActor> actor : actors_)
-    {
-        if(actor->giveLocation().isClose(loc))
-        {
+    for( auto const  &actor : actors_) {
+        if(actor->giveLocation().isClose(loc)){
             nearby_actors.push_back(actor);
         }
     }
@@ -91,13 +89,11 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 bool City::isGameOver() const
 {
 
-    if(gameclock_>=GAME_END_TIME)
-    {
+    if(gameclock_>=GAME_END_TIME) {
         qDebug() << "GAME OVER";
         return true;
     }
-    else
-    {
+    else {
         return false;
     }
 }

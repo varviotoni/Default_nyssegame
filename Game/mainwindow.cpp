@@ -77,7 +77,7 @@ void SimpleMainWindow::setPicture(QImage &img)
 void SimpleMainWindow::drawStops()
 {
     // Clear existing actors first
-    for (auto stop : stops_){
+    for (auto const &stop : stops_){
         map->removeItem(stop);
         delete stop;
     }
@@ -96,7 +96,7 @@ void SimpleMainWindow::drawStops()
 void SimpleMainWindow::updateAllActorPositions()
 {
     // Clear existing actors first
-    for (auto actor : actors_){
+    for (auto const &actor : actors_){
         map->removeItem(actor);
         delete actor;
     }
@@ -111,11 +111,17 @@ void SimpleMainWindow::updateAllActorPositions()
         }
     }
 
-    // Update positions of existing GUI actors
+    // Update positions of existing busses and passenger actors
     for (size_t i = 0; i < actors_.size() && i < allActors.size(); ++i) {
         Interface::Location loc = allActors[i]->giveLocation();
         actors_[i]->setCoord(loc.giveX(), loc.giveY());
     }
+    // handle player actor
+    // auto player = city_->getPlayer();
+    // Interface::Location loc = player->giveLocation();
+    // player_.setCoord(loc.giveX(),loc.giveY());
+
+
 }
 
 
