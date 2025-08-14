@@ -34,7 +34,6 @@ public:
     virtual void addActor(int locX, int locY, int type = 0);
     void updateCoords(int nX, int nY);
     void setPicture(QImage &img);
-    void drawAllActors();
     void drawStops();
     void updateAllActorPositions();
 
@@ -50,11 +49,12 @@ private:
     QGraphicsScene *map;
     QTimer *timer;
     QVector<ActorGUI*> actors_;
+    QVector<ActorGUI*> stops_;
     CourseSide::SimpleActorItem* last_;
 
     int width_ = 1000; //pxls
     int height_ = 500;
-    int tick_ = 50; //ms
+    int tick_ = 150; //ms
     const int BUS_TYPE = 0;
     const int PASSENGER_TYPE = 1;
     const int STOP_TYPE = 2;    

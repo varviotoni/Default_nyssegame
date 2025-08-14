@@ -31,7 +31,7 @@ void ActorGUI::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     // Bus
     if (type_ == 0) {
         // Set Z value for bus to be on top
-        this->setZValue(5);
+        this->setZValue(2);
         QImage busImage(":offlinedata/bus.png");
         painter->drawImage(bounds, busImage);
 
@@ -40,13 +40,13 @@ void ActorGUI::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     // Passenger
     else if (type_ == 1) {
         QRectF pas_bounds = QRectF(0,0,WIDTH/2,HEIGHT/2);
-        this->setZValue(10);
+        this->setZValue(1);
         painter->setBrush(Qt::red);
         painter->drawEllipse(pas_bounds);
     }
     // Stop
     else if (type_ == 2) {
-        this->setZValue(4);
+        this->setZValue(0);
         QImage stopImage(":offlinedata/stop.png");
         painter->drawImage(bounds, stopImage);
         // painter->setBrush(Qt::green);
