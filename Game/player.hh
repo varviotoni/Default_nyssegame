@@ -4,10 +4,12 @@
 
 namespace StudentSide{
 
-class player : public Interface::IActor
+class Player : public Interface::IActor
 {
 public:
-    player();
+    Player(Interface::Location start_loc);
+
+    ~Player();
 
     // IActor interface
 public:
@@ -15,6 +17,9 @@ public:
     void move(Interface::Location loc) override;
     bool isRemoved() const override;
     void remove() override;
+
+private:
+    Interface::Location location_;
 };
 } // namespace
 

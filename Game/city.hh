@@ -1,11 +1,16 @@
 #ifndef CITY_HH
 #define CITY_HH
 #include "interfaces/icity.hh"
+#include "player.hh"
 #include "QTime"
 
 namespace StudentSide {
 
 const QTime GAME_END_TIME = QTime(11, 10, 0);
+// const Interface::Location PLAYER_START_LOC=
+//     Interface::Location(6.82544e+06, 3.32823e+06);
+const Interface::Location PLAYER_START_LOC=
+    Interface::Location();
 
 class City : public Interface::ICity
 {
@@ -121,6 +126,13 @@ public:
 
     const std::vector<std::shared_ptr<Interface::IStop>>& getStops() const;
 
+    const std::shared_ptr<StudentSide::Player>& getPlayer() const;
+
+    void spawnPlayer(Interface::Location start_loc);
+
+    // initialize city ready to be handed over to logic
+    void setup();
+
     QImage background_;
     QTime gameclock_;
     int state_;
@@ -128,6 +140,7 @@ public:
 private:
     std::vector<std::shared_ptr<Interface::IActor>> actors_;
     std::vector<std::shared_ptr<Interface::IStop>> stops_;
+    std::shared_ptr<StudentSide::Player> player_;
 };
 
 }

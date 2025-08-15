@@ -2,22 +2,32 @@
 
 namespace StudentSide{
 
-player::player() {}
+Player::Player(Interface::Location start_loc):
+    location_(start_loc)
+{
+
+}
+
+Player::~Player()
+{
+
+}
 
 
-Interface::Location player::giveLocation() const
+Interface::Location Player::giveLocation() const
 {
 }
 
-void player::move(Interface::Location loc)
+void Player::move(Interface::Location loc)
+{
+    location_ = loc;
+}
+
+bool Player::isRemoved() const
 {
 }
 
-bool player::isRemoved() const
-{
-}
-
-void player::remove()
+void Player::remove()
 {
 }
 } // namespace

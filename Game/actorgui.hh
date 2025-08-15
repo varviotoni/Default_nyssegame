@@ -1,6 +1,7 @@
 #ifndef ActorGUI_HH
 #define ActorGUI_HH
 #include "graphics/simpleactoritem.hh"
+#include <QDebug>
 
 
 namespace StudentSide

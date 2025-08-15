@@ -120,8 +120,19 @@ void SimpleMainWindow::updateAllActorPositions()
     // auto player = city_->getPlayer();
     // Interface::Location loc = player->giveLocation();
     // player_.setCoord(loc.giveX(),loc.giveY());
+    //Interface::Location loc = player_->giveLocation();
+    //player_gui_->setCoord(loc.giveX(),loc.giveY());
 
 
+}
+
+void SimpleMainWindow::spawnPlayerGUI(Interface::Location start_loc)
+{
+    start_loc.setXY(100,100);
+    StudentSide::ActorGUI* player_gui = new StudentSide::ActorGUI(start_loc.giveX(), start_loc.giveY(), PLAYER_TYPE);
+    player_gui_.push_back(player_gui);
+    player_=city_->getPlayer();
+    map->addItem(player_gui);
 }
 
 
@@ -130,6 +141,7 @@ void StudentSide::SimpleMainWindow::on_startButton_clicked()
     qDebug() << "Start clicked";
     timer->start(tick_);
     drawStops();
+    spawnPlayerGUI(PLAYER_START_LOC);
     emit gameStarted();
 }
 } //namespace

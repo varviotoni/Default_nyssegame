@@ -5,6 +5,7 @@
 #include "graphics/simpleactoritem.hh"
 #include "city.hh"
 #include "actorgui.hh"
+#include "player.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -36,6 +37,7 @@ public:
     void setPicture(QImage &img);
     void drawStops();
     void updateAllActorPositions();
+    void spawnPlayerGUI(Interface::Location);
 
 signals:
     void gameStarted();
@@ -50,16 +52,18 @@ private:
     QTimer *timer;
     QVector<ActorGUI*> actors_;
     QVector<ActorGUI*> stops_;
-    QVector<ActorGUI*> player_;
+    //std::shared_ptr<ActorGUI*> player_gui_;
+    QVector<ActorGUI*> player_gui_;
+    std::shared_ptr<StudentSide::Player> player_;
     CourseSide::SimpleActorItem* last_;
 
-    int width_ = 1000; //pxls
+    int width_ =500; //pxls
     int height_ = 500;
     int tick_ = 150; //ms
     const int BUS_TYPE = 0;
     const int PASSENGER_TYPE = 1;
     const int STOP_TYPE = 2;
-    const int ALIEN_TYPE = 3;
+    const int PLAYER_TYPE = 3;
 };
 
 } //namespace

@@ -34,7 +34,6 @@ void ActorGUI::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         this->setZValue(2);
         QImage busImage(":offlinedata/bus.png");
         painter->drawImage(bounds, busImage);
-
         // painter->setBrush(Qt::blue);
     }
     // Passenger
@@ -51,11 +50,14 @@ void ActorGUI::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter->drawImage(bounds, stopImage);
         // painter->setBrush(Qt::green);
     }
-    // Alien
+    // Player
     else if (type_ == 3){
-        this->setZValue(3);
-        QImage alienImage(":offlinedata/alien.png");
-        painter->drawImage(bounds, alienImage);
+        this->setZValue(4);
+      //QImage playerImage(":offlinedata/player.png");
+      //painter->drawImage(bounds, playerImage);
+        painter->setBrush(Qt::green);
+        painter->drawEllipse(bounds);
+        //qDebug() << "draw player";
     }
 }
 

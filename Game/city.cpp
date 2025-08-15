@@ -24,7 +24,7 @@ City::~City()
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
-    background_ = bigbackground;
+    background_ = basicbackground;
 }
 
 void City::setClock(QTime clock)
@@ -105,6 +105,22 @@ const std::vector<std::shared_ptr<Interface::IActor>>& City::getActors() const
 const std::vector<std::shared_ptr<Interface::IStop>>& City::getStops() const
 {
     return stops_;
+}
+
+void City::spawnPlayer(Interface::Location start_loc)
+{
+    StudentSide::Player* player = new StudentSide::Player(start_loc);
+    player_ = std::shared_ptr<StudentSide::Player>(player);
+}
+
+void City::setup()
+{
+    spawnPlayer(PLAYER_START_LOC);
+}
+
+const std::shared_ptr<Player> &City::getPlayer() const
+{
+    return player_;
 }
 
 } // namespace
