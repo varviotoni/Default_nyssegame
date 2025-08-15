@@ -45,6 +45,9 @@ signals:
 private slots:
     void on_startButton_clicked();
 
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+
 private:
     Ui::SimpleMainWindow *ui;
     std::shared_ptr<StudentSide::City> city_;

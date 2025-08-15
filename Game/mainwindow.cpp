@@ -3,6 +3,7 @@
 #include "city.hh"
 #include "actorgui.hh"
 #include <QDebug>
+#include <QKeyEvent>
 
 const int PADDING = 10;
 
@@ -27,7 +28,6 @@ SimpleMainWindow::SimpleMainWindow(std::shared_ptr<StudentSide::City> city, QWid
 
     resize(minimumSizeHint());
     //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
-
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &SimpleMainWindow::updateAllActorPositions);
     // timer->start(tick_);
@@ -116,25 +116,71 @@ void SimpleMainWindow::updateAllActorPositions()
     }
     // handle player actor update
     Interface::Location loc = player_->giveLocation();
-    player_gui_[0]->setCoord(loc.giveX(),loc.giveY());
+    // player_gui_[0]->setCoord(loc.giveX(),loc.giveY());
+    if (!player_gui_.empty()) {
+        player_gui_[0]->setCoord(loc.giveX(), loc.giveY());
+    }
 }
 
 void SimpleMainWindow::spawnPlayerGUI(Interface::Location start_loc)
 {
-    start_loc.setXY(100,100);
+    player_=city_->getPlayer();
     StudentSide::ActorGUI* player_gui = new StudentSide::ActorGUI(start_loc.giveX(), start_loc.giveY(), PLAYER_TYPE);
     player_gui_.push_back(player_gui);
-    player_=city_->getPlayer();
-    map->addItem(player_gui);
+    map->addItem(player_gui_[0]);
 }
 
 
 void StudentSide::SimpleMainWindow::on_startButton_clicked()
 {
     qDebug() << "Start clicked";
-    timer->start(tick_);
+
     drawStops();
     spawnPlayerGUI(PLAYER_START_LOC);
+    timer->start(tick_);
     emit gameStarted();
+}
+
+void SimpleMainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if (!player_) {
+        QMainWindow::keyPressEvent(event);
+        return;
+    }
+
+    Interface::Location currentLoc = player_->giveLocation();
+    int x = currentLoc.giveX();
+    int y = currentLoc.giveY();
+
+    const int MOVE_STEP = 10;
+
+    switch (event->key()) {
+        case Qt::Key_W:
+            y -= MOVE_STEP;
+            break;
+        case Qt::Key_S:
+            y += MOVE_STEP;
+            break;
+        case Qt::Key_A:
+            x -= MOVE_STEP;
+            break;
+        case Qt::Key_D:
+            x += MOVE_STEP;
+            break;
+        default:
+            QMainWindow::keyPressEvent(event);
+            return;
+    }
+
+    // Boundary checking to keep player within game area
+    x = std::max(0, std::min(x, width_ - 30));
+    y = std::max(0, std::min(y, height_ -30));
+
+    // Update player location
+    Interface::Location newLoc;
+    newLoc.setXY(x, y);
+    player_->move(newLoc);
+
+    event->accept();
 }
 } //namespace

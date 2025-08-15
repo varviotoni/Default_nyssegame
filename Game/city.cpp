@@ -75,7 +75,7 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
     // Not needed
 }
 
-std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
+std::vector<std::shared_ptr<Interface::IActor>> City::getNearbyActors(Interface::Location loc) const
 {
     std::vector<std::shared_ptr<Interface::IActor>> nearby_actors = {};
     for( auto const  &actor : actors_) {
