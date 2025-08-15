@@ -117,13 +117,8 @@ void SimpleMainWindow::updateAllActorPositions()
         actors_[i]->setCoord(loc.giveX(), loc.giveY());
     }
     // handle player actor
-    // auto player = city_->getPlayer();
-    // Interface::Location loc = player->giveLocation();
-    // player_.setCoord(loc.giveX(),loc.giveY());
-    //Interface::Location loc = player_->giveLocation();
-    //player_gui_->setCoord(loc.giveX(),loc.giveY());
-
-
+    Interface::Location loc = player_->giveLocation();
+    player_gui_[0]->setCoord(loc.giveX(),loc.giveY());
 }
 
 void SimpleMainWindow::spawnPlayerGUI(Interface::Location start_loc)

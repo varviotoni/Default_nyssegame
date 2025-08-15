@@ -16,6 +16,7 @@ Player::~Player()
 
 Interface::Location Player::giveLocation() const
 {
+    return location_;
 }
 
 void Player::move(Interface::Location loc)
