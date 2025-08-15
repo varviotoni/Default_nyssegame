@@ -52,12 +52,9 @@ void ActorGUI::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     }
     // Player
     else if (type_ == 3){
-        this->setZValue(4);
-      //QImage playerImage(":offlinedata/player.png");
-      //painter->drawImage(bounds, playerImage);
-        painter->setBrush(Qt::green);
-        painter->drawEllipse(bounds);
-        //qDebug() << "draw player";
+        this->setZValue(3);
+        QImage playerImage(":offlinedata/player.png");
+        painter->drawImage(bounds, playerImage);
     }
 }
 

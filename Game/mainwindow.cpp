@@ -76,7 +76,6 @@ void SimpleMainWindow::setPicture(QImage &img)
 
 void SimpleMainWindow::drawStops()
 {
-    // Clear existing actors first
     for (auto const &stop : stops_){
         map->removeItem(stop);
         delete stop;
@@ -95,7 +94,6 @@ void SimpleMainWindow::drawStops()
 
 void SimpleMainWindow::updateAllActorPositions()
 {
-    // Clear existing actors first
     for (auto const &actor : actors_){
         map->removeItem(actor);
         delete actor;
@@ -104,7 +102,7 @@ void SimpleMainWindow::updateAllActorPositions()
     auto allActors = city_->getActors();
 
     for (auto const &actor : allActors) {
-        // Check actor type. Use dynamic_cast.
+        // Check actor if bus type. Use dynamic_cast.
         if (std::dynamic_pointer_cast<Interface::IVehicle>(actor)){
             Interface::Location loc = actor->giveLocation();
             addActor(loc.giveX(), loc.giveY(), BUS_TYPE);
@@ -116,7 +114,7 @@ void SimpleMainWindow::updateAllActorPositions()
         Interface::Location loc = allActors[i]->giveLocation();
         actors_[i]->setCoord(loc.giveX(), loc.giveY());
     }
-    // handle player actor
+    // handle player actor update
     Interface::Location loc = player_->giveLocation();
     player_gui_[0]->setCoord(loc.giveX(),loc.giveY());
 }

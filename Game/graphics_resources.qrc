@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>offlinedata/bus.png</file>
         <file>offlinedata/stop.png</file>
+        <file>offlinedata/player.png</file>
     </qresource>
 </RCC>
