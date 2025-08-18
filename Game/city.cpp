@@ -24,7 +24,7 @@ City::~City()
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
-    background_ = basicbackground;
+    background_ = bigbackground;
 }
 
 void City::setClock(QTime clock)

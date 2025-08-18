@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <QKeyEvent>
 
-const int PADDING = 10;
+const int PADDING = 40;
 
 namespace StudentSide {
 
@@ -15,8 +15,8 @@ SimpleMainWindow::SimpleMainWindow(std::shared_ptr<StudentSide::City> city, QWid
     city_(city)
 {
     ui->setupUi(this);
-    ui->gameView->setFixedSize(width_, height_);
-    ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING);
+    ui->gameView->setFixedSize(width_+5, height_+5);
+    ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING/2);
 
     ui->startButton->move(width_ + PADDING , PADDING);
 
@@ -27,7 +27,7 @@ SimpleMainWindow::SimpleMainWindow(std::shared_ptr<StudentSide::City> city, QWid
     this->setPicture(city_->background_);
 
     resize(minimumSizeHint());
-    //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
+    //ui->gameView->fitInView(0,0, width_, height_, Qt::KeepAspectRatio);
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &SimpleMainWindow::updateAllActorPositions);
     // timer->start(tick_);
@@ -116,7 +116,6 @@ void SimpleMainWindow::updateAllActorPositions()
     }
     // handle player actor update
     Interface::Location loc = player_->giveLocation();
-    // player_gui_[0]->setCoord(loc.giveX(),loc.giveY());
     if (!player_gui_.empty()) {
         player_gui_[0]->setCoord(loc.giveX(), loc.giveY());
     }

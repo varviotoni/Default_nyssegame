@@ -60,7 +60,7 @@ private:
     std::shared_ptr<StudentSide::Player> player_;
     CourseSide::SimpleActorItem* last_;
 
-    int width_ =500; //pxls
+    int width_ =1050; //pxls
     int height_ = 500;
     int tick_ = 150; //ms
     const int BUS_TYPE = 0;
