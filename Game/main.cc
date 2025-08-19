@@ -3,6 +3,7 @@
 #include "city.hh"
 #include "creategame.hh"
 #include "core/logic.hh"
+#include <QObject>
 
 int main(int argc, char *argv[])
 {
@@ -15,11 +16,17 @@ int main(int argc, char *argv[])
 
     StudentSide::SimpleMainWindow mainwindow(city);
     auto logic = new CourseSide::Logic();
-    logic->takeCity(icity);
-    logic->fileConfig();
-    logic->setTime(10,0);
-    logic->finalizeGameStart();
+    logic->takeCity(city);
+    QObject::connect(&mainwindow, &StudentSide::SimpleMainWindow::gameStarted, [&logic]() {
+            
+            logic->fileConfig();
+            logic->setTime(10,0);
+            logic->finalizeGameStart();
+
+    });
     mainwindow.show();
+    
+
 
     return a.exec();
 }

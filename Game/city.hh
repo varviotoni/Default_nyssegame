@@ -6,11 +6,13 @@
 
 namespace StudentSide {
 
-const QTime GAME_END_TIME = QTime(11, 10, 0);
+const QTime GAME_END_TIME = QTime(11, 2, 0);
 // const Interface::Location PLAYER_START_LOC=
 //     Interface::Location(6.82544e+06, 3.32823e+06);
 const Interface::Location PLAYER_START_LOC=
     Interface::Location();
+const int INIT_STATE=0;
+const int GAME_STATE=1;
 
 class City : public Interface::ICity
 {
@@ -127,8 +129,6 @@ public:
     const std::vector<std::shared_ptr<Interface::IStop>>& getStops() const;
 
     const std::shared_ptr<StudentSide::Player>& getPlayer() const;
-
-    void spawnPlayer(Interface::Location start_loc);
 
     // initialize city ready to be handed over to logic
     void setup();

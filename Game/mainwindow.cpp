@@ -142,9 +142,9 @@ void StudentSide::SimpleMainWindow::on_startButton_clicked()
 
 void SimpleMainWindow::keyPressEvent(QKeyEvent *event)
 {
-    if (!player_) {
+    if (!player_ || city_->isGameOver()) {
         QMainWindow::keyPressEvent(event);
-        return;
+        return; 
     }
 
     Interface::Location currentLoc = player_->giveLocation();

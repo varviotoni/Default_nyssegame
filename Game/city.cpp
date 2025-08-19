@@ -7,9 +7,10 @@ namespace StudentSide{
 
 City::City():
     gameclock_(),
-    state_(1),
+    state_(INIT_STATE),
     actors_(),
-    stops_()
+    stops_(),
+    player_(std::shared_ptr<StudentSide::Player>(new Player(PLAYER_START_LOC)))
 
 {
 
@@ -42,7 +43,9 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
 void City::startGame()
 {
-    state_=1;
+    Q_ASSERT(state_==INIT_STATE);
+    Q_ASSERT(gameclock_.isValid());
+    state_=GAME_STATE;
 }
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
@@ -107,15 +110,9 @@ const std::vector<std::shared_ptr<Interface::IStop>>& City::getStops() const
     return stops_;
 }
 
-void City::spawnPlayer(Interface::Location start_loc)
-{
-    StudentSide::Player* player = new StudentSide::Player(start_loc);
-    player_ = std::shared_ptr<StudentSide::Player>(player);
-}
-
 void City::setup()
 {
-    spawnPlayer(PLAYER_START_LOC);
+
 }
 
 const std::shared_ptr<Player> &City::getPlayer() const
