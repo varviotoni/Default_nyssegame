@@ -133,11 +133,10 @@ void SimpleMainWindow::spawnPlayerGUI(Interface::Location start_loc)
 void StudentSide::SimpleMainWindow::on_startButton_clicked()
 {
     qDebug() << "Start clicked";
-
-    drawStops();
-    spawnPlayerGUI(PLAYER_START_LOC);
     timer->start(tick_);
     emit gameStarted();
+    drawStops();
+    spawnPlayerGUI(PLAYER_START_LOC);
 }
 
 void SimpleMainWindow::keyPressEvent(QKeyEvent *event)

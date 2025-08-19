@@ -16,17 +16,12 @@ int main(int argc, char *argv[])
 
     StudentSide::SimpleMainWindow mainwindow(city);
     auto logic = new CourseSide::Logic();
-    logic->takeCity(city);
-    QObject::connect(&mainwindow, &StudentSide::SimpleMainWindow::gameStarted, [&logic]() {
-            
+    QObject::connect(&mainwindow, &StudentSide::SimpleMainWindow::gameStarted, [&logic,&city]() {
+            logic->takeCity(city);
             logic->fileConfig();
             logic->setTime(10,0);
             logic->finalizeGameStart();
-
     });
     mainwindow.show();
-    
-
-
     return a.exec();
 }
