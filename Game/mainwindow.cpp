@@ -34,6 +34,12 @@ SimpleMainWindow::SimpleMainWindow(std::shared_ptr<StudentSide::City> city, QWid
 
 SimpleMainWindow::~SimpleMainWindow()
 {
+    // Clean up actor pool
+    for (auto actor : actor_pool_) {
+        delete actor;
+    }
+    actor_pool_.clear();
+    
     delete ui;
 }
 
@@ -96,35 +102,44 @@ void SimpleMainWindow::drawStops()
 
 void SimpleMainWindow::updateAllActorPositions()
 {
-    for (auto const &actor : actors_){
+    // Hide existing actors and return to pool
+    for (auto const &actor : actors_) {
+        actor->setVisible(false);
         map->removeItem(actor);
-        delete actor;
+        actor_pool_.push_back(actor);
     }
     actors_.clear();
+    
     auto allActors = city_->getActors();
-
+    
     for (auto const &actor : allActors) {
-        // Check actor if bus type. Use dynamic_cast.
-        if (std::dynamic_pointer_cast<Interface::IVehicle>(actor)){
+        if (std::dynamic_pointer_cast<Interface::IVehicle>(actor)) {
             Interface::Location loc = actor->giveLocation();
             auto bus = std::dynamic_pointer_cast<Interface::IVehicle>(actor);
             int num_passengers = bus->getPassengers().size();
-            addActor(loc.giveX(), loc.giveY(), BUS_TYPE, num_passengers);
+            
+            StudentSide::ActorGUI* busActor;
+            if (!actor_pool_.empty()) {
+                // Reuse from pool
+                busActor = actor_pool_.back();
+                actor_pool_.pop_back();
+                busActor->setCoord(loc.giveX(), loc.giveY());
+                busActor->setPassengers(num_passengers);
+                busActor->setVisible(true);
+            } else {
+                // Create new if pool is empty
+                busActor = new StudentSide::ActorGUI(loc.giveX(), loc.giveY(), BUS_TYPE);
+                busActor->setPassengers(num_passengers);
+            }
+            
+            actors_.push_back(busActor);
+            map->addItem(busActor);
         }
-        // else if (std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
-        //     Interface::Location loc = actor->giveLocation();
-        //     addActor(loc.giveX(), loc.giveY(), PASSENGER_TYPE);
-        // }
     }
-
-    // Update positions of existing busses and passenger actors
-    for (size_t i = 0; i < actors_.size() && i < allActors.size(); ++i) {
-        Interface::Location loc = allActors[i]->giveLocation();
-        actors_[i]->setCoord(loc.giveX(), loc.giveY());
-    }
-    // handle player actor update
-    Interface::Location loc = player_->giveLocation();
-    if (!player_gui_.empty()) {
+    
+    // Update player position
+    if (player_ && !player_gui_.empty()) {
+        Interface::Location loc = player_->giveLocation();
         player_gui_[0]->setCoord(loc.giveX(), loc.giveY());
     }
 }

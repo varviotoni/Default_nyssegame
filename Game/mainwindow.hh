@@ -55,7 +55,9 @@ private:
     QTimer *timer;
     QVector<ActorGUI*> actors_;
     QVector<ActorGUI*> stops_;
-    //std::shared_ptr<ActorGUI*> player_gui_;
+    std::vector<StudentSide::ActorGUI*> actor_pool_;
+    std::vector<StudentSide::ActorGUI*> stop_pool_;
+    // std::shared_ptr<ActorGUI*> player_gui_;
     QVector<ActorGUI*> player_gui_;
     std::shared_ptr<StudentSide::Player> player_;
     CourseSide::SimpleActorItem* last_;
