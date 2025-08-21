@@ -64,7 +64,7 @@ private:
 
     int width_ =1050; //pxls
     int height_ = 500;
-    int tick_ = 150; //ms
+    int tick_ = 75; //ms
     const int BUS_TYPE = 0;
     const int PASSENGER_TYPE = 1;
     const int STOP_TYPE = 2;

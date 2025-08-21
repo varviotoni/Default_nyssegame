@@ -6,8 +6,8 @@
 
 namespace StudentSide
 {
-const int WIDTH = 30;
-const int HEIGHT = 30;
+const int BOUNDS_WIDTH = 40;
+const int BOUNDS_HEIGHT = 40;
 
 class ActorGUI : public CourseSide::SimpleActorItem
 {

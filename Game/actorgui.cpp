@@ -20,7 +20,7 @@ ActorGUI::~ActorGUI()
 
 QRectF ActorGUI::boundingRect() const
 {
-    return QRectF(0, 0, WIDTH, HEIGHT);
+    return QRectF(0, 0, BOUNDS_WIDTH, BOUNDS_HEIGHT);
 }
 
 void ActorGUI::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -41,23 +41,25 @@ void ActorGUI::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     }
     // Passenger
     else if (type_ == 1) {
-        QRectF pas_bounds = QRectF(0,0,WIDTH/2,HEIGHT/2);
+        QRectF pas_bounds = QRectF(0,0,BOUNDS_WIDTH/4,BOUNDS_HEIGHT/4);
         this->setZValue(1);
         painter->setBrush(Qt::red);
         painter->drawEllipse(pas_bounds);
     }
     // Stop
     else if (type_ == 2) {
+        QRectF stop_bounds = QRectF(0,0,BOUNDS_WIDTH/2,BOUNDS_HEIGHT/2);
         this->setZValue(0);
         QImage stopImage(":offlinedata/stop.png");
-        painter->drawImage(bounds, stopImage);
+        painter->drawImage(stop_bounds, stopImage);
         // painter->setBrush(Qt::green);
     }
     // Player
     else if (type_ == 3){
+        QRectF player_bounds = QRectF(0,0,BOUNDS_WIDTH/2,BOUNDS_HEIGHT/2);
         this->setZValue(3);
         QImage playerImage(":offlinedata/player.png");
-        painter->drawImage(bounds, playerImage);
+        painter->drawImage(player_bounds, playerImage);
     }
 }
 
