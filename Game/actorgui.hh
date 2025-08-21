@@ -20,11 +20,13 @@ public:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     void setCoord(int x, int y);
+    void setPassengers(int p);
 
 private:
     int x_;
     int y_;
     const int type_;
+    int num_passengers_;
 };
 } // namespace
 #endif // ActorGUI_HH

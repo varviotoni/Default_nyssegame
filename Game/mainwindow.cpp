@@ -27,7 +27,6 @@ SimpleMainWindow::SimpleMainWindow(std::shared_ptr<StudentSide::City> city, QWid
     this->setPicture(city_->background_);
 
     resize(minimumSizeHint());
-    //ui->gameView->fitInView(0,0, width_, height_, Qt::KeepAspectRatio);
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &SimpleMainWindow::updateAllActorPositions);
     // timer->start(tick_);
@@ -49,12 +48,15 @@ void SimpleMainWindow::setTick(int t)
     tick_ = t;
 }
 
-void SimpleMainWindow::addActor(int locX, int locY, int type)
+void SimpleMainWindow::addActor(int locX, int locY, int type, int num_passengers)
 {
     StudentSide::ActorGUI* nActor = new StudentSide::ActorGUI(locX, locY, type);
     if (type == 0 || type == 1 ){
         actors_.push_back(nActor);
         map->addItem(nActor);
+        if (type == 0){
+            nActor->setPassengers(num_passengers);
+        }
         //last_ = nActor;
     }
     if (type == 2){
@@ -105,8 +107,14 @@ void SimpleMainWindow::updateAllActorPositions()
         // Check actor if bus type. Use dynamic_cast.
         if (std::dynamic_pointer_cast<Interface::IVehicle>(actor)){
             Interface::Location loc = actor->giveLocation();
-            addActor(loc.giveX(), loc.giveY(), BUS_TYPE);
+            auto bus = std::dynamic_pointer_cast<Interface::IVehicle>(actor);
+            int num_passengers = bus->getPassengers().size();
+            addActor(loc.giveX(), loc.giveY(), BUS_TYPE, num_passengers);
         }
+        // else if (std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
+        //     Interface::Location loc = actor->giveLocation();
+        //     addActor(loc.giveX(), loc.giveY(), PASSENGER_TYPE);
+        // }
     }
 
     // Update positions of existing busses and passenger actors

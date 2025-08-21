@@ -32,7 +32,7 @@ public:
     void setSize(int w, int h);
     void setTick(int t);
 
-    virtual void addActor(int locX, int locY, int type = 0);
+    void addActor(int locX, int locY, int type = 0, int num_passengers=0);
     void updateCoords(int nX, int nY);
     void setPicture(QImage &img);
     void drawStops();
